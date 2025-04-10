@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
+    <!-- Application Configuration -->
+    <application
+        android:name=".MyApplication"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.JobPortal"
+        tools:ignore="MissingApplicationIcon"
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="33"> <!-- Add this line -->
+
+        <!-- Activities -->
+        <activity android:name="com.example.jobportalapp.Activities.JobDetailsActivity" android:exported="true"/>
+        <activity android:name="com.example.jobportalapp.Activities.AdminActivity" android:exported="true"/>
+        <activity android:name="com.example.jobportalapp.Activities.RoleActivity" android:exported="true"/>
+
+        <!-- LoginActivity will be displayed after StartingActivity -->
+        <activity android:name="com.example.jobportalapp.Activities.LoginActivity" android:exported="true"/>
+
+        <!-- MainActivity is where the app will go after login -->
+        <activity android:name="com.example.jobportalapp.MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- StartingActivity will be the first screen -->
+        <activity android:name="com.example.jobportalapp.Activities.StartingActivity" android:exported="true"/>
+        <activity android:name="com.example.jobportalapp.Activities.RegistrationActivity" android:exported="true"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">JobPortal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_resume_link_available">No resume link available</string>
+    <string name="enter_email_password">Please enter both email and password.</string>
+    <string name="invalid_email">Please enter a valid email address.</string>
+    <string name="password_length_error">Password must be at least 6 characters.</string>
+    <string name="error_saving_login_info">Error saving login info: %1$s</string>
+        <string name="unknown_user">Unknown User</string>
+        <string name="unknown_job_title">Unknown Job Title</string>
+        <string name="error_update_data">Error Updating Data</string>
+    <string name="user_id_null">User ID is null</string>
+    <string name="authentication_failed">Authentication failed. Please check your credentials.</string>
+    <string name="error_missing_data">Error: Missing data!</string>
+    <string name="error_failed_to_generate_key">Failed to generate application key.</string>
+    <string name="error_update_user_data">Failed to update user data</string>
+    <string name="error_update_admin_data">Failed to update admin data</string>
+    <string name="error_update">Error during update. Please try again.</string>
+    <string name="application_accepted">Application accepted</string>
+        <!-- Default/Unknown Values -->
+        <string name="unknown_company">Unknown Company</string>
+        <string name="unknown_salary">Unknown Salary</string>
+        <string name="unknown_start_date">Unknown Start Date</string>
+        <string name="unknown_apply_by">Unknown Apply By Date</string>
+        <string name="unknown_openings">Unknown Openings</string>
+        <string name="unknown_skills">Unknown Required Skills</string>
+        <string name="unknown_job_description">Unknown Job Description</string>
+        <string name="unknown_additional_data">Unknown Additional Data</string>
+
+        <!-- Error Messages -->
+
+
+        <!-- Success Messages -->
+
+
+        <!-- Button/Action Text -->
+        <string name="application_received">Application Received</string>
+
+
+        <!-- Other Placeholder Strings -->
+        <string name="upload_resume_button">Upload Resume</string>
+        <string name="apply_job_button">Apply for Job</string>
+        <string name="accept_job_application_button">Accept Job Application</string>
+
+
+</resources>

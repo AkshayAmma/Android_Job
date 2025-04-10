@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText"
+    android:orientation="vertical"
+    android:background="@drawable/jobi"
+    tools:context=".Activities.RoleActivity"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Title TextView -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Role"
+        android:textSize="32sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center" />
+
+    <!-- Admin Button -->
+    <Button
+        android:id="@+id/AdminBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#4CAF50" /> <!-- Green background for Admin -->
+
+    <!-- Job Seeker Button -->
+    <Button
+        android:id="@+id/JobSeekerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Job Seeker"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#2196F3" /> <!-- Blue background for Job Seeker -->
+
+    <!-- ProgressBar (Initially Hidden) -->
+    <ProgressBar
+        android:id="@+id/r_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+</LinearLayout>

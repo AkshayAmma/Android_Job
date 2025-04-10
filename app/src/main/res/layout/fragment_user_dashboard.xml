@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/jobi"
+    tools:ignore="HardcodedText"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Fragments.UserDashboardFragment"
+    android:padding="16dp">
+
+    <!-- Switch to toggle between views -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/UserDashBoardSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/thumb"
+        app:track="@drawable/track"
+        app:showText="true"
+        android:textOn="Placed Applications"
+        android:textOff="All Applications"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:contentDescription="Toggle between placed applications and all applications"/>
+
+    <!-- FrameLayout to hold dynamic content -->
+    <FrameLayout
+        android:id="@+id/UserDashBoardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/jobi"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AdminSelectedFragment">
+
+    <!-- Adding contentDescription to make it accessible for screen readers -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/AdminSelectedApplicationsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="List of job applications" />
+</LinearLayout>

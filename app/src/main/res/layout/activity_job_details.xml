@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="hardcodedText"
+    tools:context=".Activities.JobDetailsActivity"
+    android:background="@drawable/jobi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ScrollView to make the content scrollable if needed -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
+
+            <!-- Company Name TextView -->
+            <TextView
+                android:id="@+id/CompanyNameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Company Name"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Job Title TextView -->
+            <TextView
+                android:id="@+id/JobTitleTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Job Title"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Salary TextView -->
+            <TextView
+                android:id="@+id/SalaryTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Job Salary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Job Start Date TextView -->
+            <TextView
+                android:id="@+id/JobStartDateTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Job Start By"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Apply By Date TextView -->
+            <TextView
+                android:id="@+id/LastDateToApplyTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Apply By"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Total Number of Openings TextView -->
+            <TextView
+                android:id="@+id/TotolNoOfOpeningsTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Total No of Openings"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Required Skills TextView -->
+            <TextView
+                android:id="@+id/RequiredSkillsTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Required Skills"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Job Description TextView -->
+            <TextView
+                android:id="@+id/JobDescriptionTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Job Description"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Additional Data TextView -->
+            <TextView
+                android:id="@+id/AdditionalDataTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Additional Data"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333" />
+
+            <!-- Select Resume Button -->
+            <Button
+                android:id="@+id/SelectResumeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Select Resume PDF"
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:backgroundTint="@android:color/holo_green_dark"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/SelectedFileNameTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No file selected"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:layout_marginBottom="16dp"
+                android:padding="4dp" />
+
+            <!-- Apply Button -->
+            <Button
+                android:id="@+id/ApplyJobBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply For Job"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
