@@ -27,26 +27,26 @@ public class UserAllApplicationsAdapter extends FirebaseRecyclerAdapter<Model, U
         Context context = holder.itemView.getContext();  // More reliable context retrieval
 
         // For loading applications of a user into RecyclerView
-        holder.txtTitle.setText(model.getCompanyName());
-        holder.txtDesc.setText(model.getJobTitle());
+        holder.txtTitle.setText("Company Name:"+model.getCompanyName());
+        holder.txtDesc.setText("Job Title:"+model.getJobTitle());
 
         // OnClickListener to open job details
-        holder.txtTitle.setOnClickListener(view -> {
-            // Ensure data exists before passing it
-            Intent intent = new Intent(context, JobDetailsActivity.class);
-            intent.putExtra("companyName", model.getCompanyName());
-            intent.putExtra("jobTitle", model.getJobTitle());
-            intent.putExtra("jobDescription", model.getAboutJob());
-            intent.putExtra("jobSalary", model.getJobSalary());
-            intent.putExtra("startDate", model.getJobStartDate());
-            intent.putExtra("lastDate", model.getJobLastDate());
-            intent.putExtra("totalOpenings", model.getTotalOpenings());
-            intent.putExtra("requiredSkills", model.getSkillsRequired());
-            intent.putExtra("additionalInfo", model.getAdditionalInfo());
-            intent.putExtra("userId", model.getAdminId());
-
-            context.startActivity(intent); // Starting JobDetailsActivity
-        });
+//        holder.txtTitle.setOnClickListener(view -> {
+//            // Ensure data exists before passing it
+//            Intent intent = new Intent(context, JobDetailsActivity.class);
+//            intent.putExtra("companyName", model.getCompanyName());
+//            intent.putExtra("jobTitle", model.getJobTitle());
+//            intent.putExtra("jobDescription", model.getAboutJob());
+//            intent.putExtra("jobSalary", model.getJobSalary());
+//            intent.putExtra("startDate", model.getJobStartDate());
+//            intent.putExtra("lastDate", model.getJobLastDate());
+//            intent.putExtra("totalOpenings", model.getTotalOpenings());
+//            intent.putExtra("requiredSkills", model.getSkillsRequired());
+//            intent.putExtra("additionalInfo", model.getAdditionalInfo());
+//            intent.putExtra("userId", model.getAdminId());
+//
+//            context.startActivity(intent); // Starting JobDetailsActivity
+//        });
     }
 
     @NonNull

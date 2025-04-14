@@ -1,6 +1,10 @@
 package com.example.jobportalapp.Model;
 
-public class Model {
+import java.io.Serializable;
+
+public class Model implements Serializable {
+
+    private static final long serialVersionUID = 1L;  // Optional, but recommended for version control
 
     private String id;
     private String mail;

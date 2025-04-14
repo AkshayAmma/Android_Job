@@ -27,10 +27,10 @@ public class AdminSelectedApplicationAdapter extends FirebaseRecyclerAdapter<Mod
         Log.d("AdminSelectedApp", "JobTitle: " + model.getJobTitle());
 
         // Loading the selected application user name into the recycler view
-        holder.txtTitle.setText(model.getUserName());
+        holder.txtTitle.setText("User Name:"+model.getUserName());
 
         // Loading the selected application job title into the recycler view
-        holder.txtaboutjob.setText(model.getJobTitle());
+        holder.txtaboutjob.setText("Job Title:"+model.getJobTitle());
 
         // Optional: You can load the description as well if needed
     }
@@ -58,7 +58,6 @@ public class AdminSelectedApplicationAdapter extends FirebaseRecyclerAdapter<Mod
             super(itemView);
 
             // Assigning the views from the layout to the corresponding variables
-            txtusername=itemView.findViewById(R.id.username);
             txtTitle = itemView.findViewById(R.id.Title);
             txtaboutjob = itemView.findViewById(R.id.Desc);
 

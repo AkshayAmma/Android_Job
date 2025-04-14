@@ -1,6 +1,8 @@
 package com.example.jobportalapp.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -9,21 +11,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
 
 import com.example.jobportalapp.MainActivity;
 import com.example.jobportalapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    // Declare UI components
     private EditText emailEditText, passwordEditText;
     private FirebaseAuth firebaseAuth;
     private ProgressBar progressBar;
@@ -34,106 +33,126 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Authentication
+        // Initialize Firebase
         firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-        // Initialize UI components
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         Button loginButton = findViewById(R.id.loginButton);
-        TextView signUpLink = findViewById(R.id.to_reg);  // Sign Up link
-
-        // Initialize ProgressBar
+        TextView signUpLink = findViewById(R.id.to_reg);
         progressBar = findViewById(R.id.progressBar);
 
-        // Initialize Firebase Realtime Database reference
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        // Check if the user is already logged in
+        // Check if user is already signed in
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
-            navigateToMainActivity();
+            checkUserRoleAndNavigate(currentUser.getUid());
         }
 
-        // Login button click listener
+        // Login button click
         loginButton.setOnClickListener(view -> {
             String email = emailEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
 
-            // Validate input fields
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Please enter both email and password.", Toast.LENGTH_SHORT).show();
+                showToast("Please enter both email and password.");
             } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(LoginActivity.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+                showToast("Please enter a valid email address.");
             } else if (password.length() < 6) {
-                Toast.makeText(LoginActivity.this, "Password must be at least 6 characters.", Toast.LENGTH_SHORT).show();
+                showToast("Password must be at least 6 characters.");
             } else {
                 loginUser(email, password);
             }
         });
 
-        // Sign Up link click listener
+        // Navigate to RegistrationActivity
         signUpLink.setOnClickListener(v -> {
-            // Navigate to the Sign Up activity
             Intent signUpIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(signUpIntent);
         });
     }
 
     private void loginUser(String email, String password) {
-        // Show ProgressBar
         progressBar.setVisibility(ProgressBar.VISIBLE);
 
-        // Firebase Authentication: Sign in with email and password
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);
+
                     if (task.isSuccessful()) {
-                        // Get the signed-in user
-                        FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
-
-                        // Check if user is not null and proceed
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
                         if (user != null) {
-                            // Log the UID of the signed-in user
-                            String uid = user.getUid();
-                            Log.d("Auth UID", "User ID: " + uid);  // Log the UID
-
-                            // Create a map to save user login details in Firebase Realtime Database
-                            Map<String, Object> userLoginData = new HashMap<>();
-                            userLoginData.put("email", email);
-                            userLoginData.put("lastLogin", System.currentTimeMillis());
-
-                            // Save user login information in Firebase Realtime Database
-                            String userId = user.getUid();
-                            if (userId != null) {
-                                databaseReference.child(userId).updateChildren(userLoginData)
-                                        .addOnSuccessListener(aVoid -> {
-                                            // After successful data update, go to MainActivity
-                                            progressBar.setVisibility(ProgressBar.INVISIBLE);  // Hide ProgressBar
-                                            navigateToMainActivity();
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            progressBar.setVisibility(ProgressBar.INVISIBLE);  // Hide ProgressBar
-                                            Log.e("LoginActivity", "Error saving login info", e);  // Log the error
-                                            Toast.makeText(LoginActivity.this, "Error saving login info: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        });
-                            } else {
-                                progressBar.setVisibility(ProgressBar.INVISIBLE);
-                                Toast.makeText(LoginActivity.this, "User ID is null", Toast.LENGTH_SHORT).show();
-                            }
+                            updateLoginInfo(user.getUid(), email);
+                            checkUserRoleAndNavigate(user.getUid());
                         }
                     } else {
-                        // If authentication failed, show a message
-                        progressBar.setVisibility(ProgressBar.INVISIBLE);  // Hide ProgressBar
-                        Toast.makeText(LoginActivity.this, "Authentication failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
+                        String errorMessage = task.getException() != null ? task.getException().getMessage() : "Authentication failed.";
+                        showToast(errorMessage);
+                    }
+                });
+    }
+
+    private void updateLoginInfo(String userId, String email) {
+        Map<String, Object> userLoginData = new HashMap<>();
+        userLoginData.put("email", email);
+        userLoginData.put("lastLogin", System.currentTimeMillis());
+
+        databaseReference.child(userId).updateChildren(userLoginData)
+                .addOnSuccessListener(aVoid -> {
+                    // Optional: log success
+                })
+                .addOnFailureListener(e -> {
+                    // Optional: log failure
+                });
+    }
+
+    private void checkUserRoleAndNavigate(String userId) {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+
+        databaseReference.child(userId).child("role")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        progressBar.setVisibility(ProgressBar.INVISIBLE);
+
+                        if (snapshot.exists()) {
+                            String role = snapshot.getValue(String.class);
+                            if ("admin".equals(role)) {
+                                navigateToAdminDashboard();
+                            } else if ("jobseeker".equals(role)) {
+                                navigateToMainActivity();
+                            } else {
+                                showToast("Unknown role assigned.");
+                            }
+                        } else {
+                            // No role selected yet → navigate to SelectRoleActivity
+                            Intent intent = new Intent(LoginActivity.this, RoleActivity.class);
+                            intent.putExtra("userId", userId);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        progressBar.setVisibility(ProgressBar.INVISIBLE);
+                        showToast("Failed to get role: " + error.getMessage());
                     }
                 });
     }
 
     private void navigateToMainActivity() {
-        // Navigate to MainActivity
-        Intent mainIntent = new Intent(LoginActivity.this, RoleActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
-        finish(); // Finish the login activity so the user cannot navigate back to it
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void navigateToAdminDashboard() {
+        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }

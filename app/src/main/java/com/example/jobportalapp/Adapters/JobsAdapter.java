@@ -23,67 +23,46 @@ public class JobsAdapter extends FirebaseRecyclerAdapter<Model, JobsAdapter.View
     }
 
     @Override
-    protected void onBindViewHolder(Viewholder holder, int position, Model model) {
-        Context context = holder.itemView.getContext();  // Better practice for getting the context
+    protected void onBindViewHolder(@NonNull Viewholder holder, int position, @NonNull Model model) {
+        Context context = holder.itemView.getContext();
 
-        // For loading all job titles into the RecyclerView
-        holder.txtTitle.setText(model.getJobTitle());
+        // Show readable text
+        holder.txtTitle.setText("Job Title: " + model.getJobTitle());
+        holder.txtDesc.setText("Salary: " + model.getJobSalary());
 
-        // For loading all the job salaries into the RecyclerView
-        holder.txtDesc.setText(model.getJobSalary());
-
-        // Handling click event on job title to show more details
+        // Click event for navigating to job details
         holder.txtTitle.setOnClickListener(view -> {
-            // Retrieving all the job details to pass in the Intent
-            String companyName = model.getCompanyName();
-            String jobTitle = model.getJobTitle();
-            String jobDescription = model.getAboutJob();
-            String jobSalary = model.getJobSalary();
-            String startDate = model.getJobStartDate();
-            String lastDate = model.getJobLastDate();
-            String totalOpenings = model.getTotalOpenings();
-            String requiredSkills = model.getSkillsRequired();
-            String additionalInfo = model.getAdditionalInfo();
-            String userId = model.getAdminId();
-
-            // Create Intent to navigate to JobDetailsActivity
             Intent intent = new Intent(context, JobDetailsActivity.class);
 
-            // Passing job details to JobDetailsActivity using Intent
-            intent.putExtra("companyName", companyName);
-            intent.putExtra("jobTitle", jobTitle);
-            intent.putExtra("jobDescription", jobDescription);
-            intent.putExtra("jobSalary", jobSalary);
-            intent.putExtra("startDate", startDate);
-            intent.putExtra("lastDate", lastDate);
-            intent.putExtra("totalOpenings", totalOpenings);
-            intent.putExtra("requiredSkills", requiredSkills);
-            intent.putExtra("additionalInfo", additionalInfo);
-            intent.putExtra("userId", userId);
+            // Only pass raw data, format in UI later
+            intent.putExtra("companyName", model.getCompanyName());
+            intent.putExtra("jobTitle", model.getJobTitle());
+            intent.putExtra("jobDescription", model.getAboutJob());
+            intent.putExtra("jobSalary", model.getJobSalary());
+            intent.putExtra("startDate", model.getJobStartDate());
+            intent.putExtra("lastDate", model.getJobLastDate());
+            intent.putExtra("totalOpenings", model.getTotalOpenings());
+            intent.putExtra("requiredSkills", model.getSkillsRequired());
+            intent.putExtra("additionalInfo", model.getAdditionalInfo());
+            intent.putExtra("userId", model.getAdminId()); // ⚠️ This is admin ID
 
-            // Starting JobDetailsActivity
             context.startActivity(intent);
         });
     }
 
     @NonNull
     @Override
-    public Viewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflating the view for each RecyclerView item (job listing)
+    public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_data_file, parent, false);
         return new Viewholder(view);
     }
 
-    // Viewholder to hold each individual job data in the RecyclerView
     public static class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtTitle;  // TextView for job title
-        TextView txtDesc;   // TextView for job description (salary)
+        TextView txtTitle, txtDesc;
 
-        public Viewholder(View itemView) {
+        public Viewholder(@NonNull View itemView) {
             super(itemView);
-
-            // Initializing the TextViews for job title and description
             txtTitle = itemView.findViewById(R.id.Title);
             txtDesc = itemView.findViewById(R.id.Desc);
         }

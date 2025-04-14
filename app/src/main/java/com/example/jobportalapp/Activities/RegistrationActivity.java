@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.jobportalapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,39 +39,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         String password1 = pwd1.getText().toString().trim();
 
         // Validation checks
-        if (email.isEmpty()) {
-            mailid.setError("Email is required");
-            mailid.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mailid.setError("Please enter a valid email");
-            mailid.requestFocus();
-            return;
-        }
-
-        if (password.isEmpty()) {
-            pwd.setError("Password is required");
-            pwd.requestFocus();
-            return;
-        }
-
-        if (password1.isEmpty()) {
-            pwd1.setError("Please confirm your password");
-            pwd1.requestFocus();
-            return;
-        }
-
-        if (password.length() < 6) {
-            pwd.setError("Password should be at least 6 characters");
-            pwd.requestFocus();
-            return;
-        }
-
-        if (!password1.equals(password)) {
-            pwd1.setError("Passwords don't match");
-            pwd1.requestFocus();
+        if (!isValidInput(email, password, password1)) {
             return;
         }
 
@@ -91,24 +58,72 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 // Registration was successful
                 Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();  // Sign out after successful registration
-                finish();
+                clearInputFields();  // Clear the input fields
+
                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else {
                 // Handle errors
-                Exception e = task.getException();
-                if (e != null) {
-                    Toast.makeText(RegistrationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegistrationActivity.this, "Registration failed due to an unknown error", Toast.LENGTH_SHORT).show();
-                }
-
-                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                    Toast.makeText(RegistrationActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
-                }
+                handleRegistrationError(task.getException());
             }
         });
+    }
+
+    private boolean isValidInput(String email, String password, String password1) {
+        if (email.isEmpty()) {
+            mailid.setError("Email is required");
+            mailid.requestFocus();
+            return false;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mailid.setError("Please enter a valid email");
+            mailid.requestFocus();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            pwd.setError("Password is required");
+            pwd.requestFocus();
+            return false;
+        }
+
+        if (password1.isEmpty()) {
+            pwd1.setError("Please confirm your password");
+            pwd1.requestFocus();
+            return false;
+        }
+
+        if (password.length() < 6) {
+            pwd.setError("Password should be at least 6 characters");
+            pwd.requestFocus();
+            return false;
+        }
+
+        if (!password1.equals(password)) {
+            pwd1.setError("Passwords don't match");
+            pwd1.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void handleRegistrationError(Exception exception) {
+        if (exception instanceof FirebaseAuthUserCollisionException) {
+            Toast.makeText(RegistrationActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
+        } else if (exception != null) {
+            Toast.makeText(RegistrationActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(RegistrationActivity.this, "Registration failed due to an unknown error", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void clearInputFields() {
+        mailid.setText("");
+        pwd.setText("");
+        pwd1.setText("");
     }
 
     @Override

@@ -18,17 +18,19 @@ public class StartingActivity extends AppCompatActivity {
         // Initialize the "Get Started" button
         Button getStartedBtn = findViewById(R.id.GetStartedBtn);
 
-        // Set an OnClickListener to navigate from StartingActivity to LoginActivity
-        getStartedBtn.setOnClickListener(view -> {
-            // Create an intent to navigate to LoginActivity
-            Intent intent = new Intent(StartingActivity.this, LoginActivity.class);
+        // Ensure the button is not null and set the click listener
+        if (getStartedBtn != null) {
+            getStartedBtn.setOnClickListener(view -> {
+                // Create an intent to navigate to LoginActivity
+                Intent intent = new Intent(StartingActivity.this, LoginActivity.class);
 
-            // Add flags to ensure the user cannot navigate back to StartingActivity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                // Add flags to ensure the user cannot navigate back to StartingActivity
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            // Start LoginActivity and finish the current activity to prevent navigation back
-            startActivity(intent);
-            finish();  // Close StartingActivity
-        });
+                // Start LoginActivity and finish the current activity to prevent navigation back
+                startActivity(intent);
+                // Close StartingActivity
+            });
+        }
     }
 }

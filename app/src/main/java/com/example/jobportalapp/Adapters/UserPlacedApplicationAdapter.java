@@ -28,45 +28,45 @@ public class UserPlacedApplicationAdapter extends FirebaseRecyclerAdapter<Model,
 
         // Check if the views are not null before setting text
         if (holder.txtTitle != null) {
-            holder.txtTitle.setText(model.getCompanyName());
+            holder.txtTitle.setText("Company Name:"+model.getCompanyName());
         }
 
         if (holder.txtDesc != null) {
-            holder.txtDesc.setText(model.getJobTitle());
+            holder.txtDesc.setText("Job Title:"+model.getJobTitle());
         }
 
         // Click Listener to open detailed information about the job
-        holder.itemView.setOnClickListener(view -> {
-            // Getting details for the selected job
-            String companyName = model.getCompanyName();
-            String jobTitle = model.getJobTitle();
-            String jobDescription = model.getAboutJob();
-            String jobSalary = model.getJobSalary();
-            String startDate = model.getJobStartDate();
-            String lastDate = model.getJobLastDate();
-            String totalOpenings = model.getTotalOpenings();
-            String requiredSkills = model.getSkillsRequired();
-            String additionalInfo = model.getAdditionalInfo();
-            String userId = model.getAdminId();
+//        holder.itemView.setOnClickListener(view -> {
+//            // Getting details for the selected job
+//            String companyName = model.getCompanyName();
+//            String jobTitle = model.getJobTitle();
+//            String jobDescription = model.getAboutJob();
+//            String jobSalary = model.getJobSalary();
+//            String startDate = model.getJobStartDate();
+//            String lastDate = model.getJobLastDate();
+//            String totalOpenings = model.getTotalOpenings();
+//            String requiredSkills = model.getSkillsRequired();
+//            String additionalInfo = model.getAdditionalInfo();
+//            String userId = model.getAdminId();
 
             // Creating an intent to show the details of the selected job
-            Intent intent = new Intent(context, JobDetailsActivity.class);
-
-            // Passing the job details to the next activity
-            intent.putExtra("companyName", companyName);
-            intent.putExtra("jobTitle", jobTitle);
-            intent.putExtra("jobDescription", jobDescription);
-            intent.putExtra("jobSalary", jobSalary);
-            intent.putExtra("startDate", startDate);
-            intent.putExtra("lastDate", lastDate);
-            intent.putExtra("totalOpenings", totalOpenings);
-            intent.putExtra("requiredSkills", requiredSkills);
-            intent.putExtra("additionalInfo", additionalInfo);
-            intent.putExtra("userId", userId);
-
-            // Starting the JobDetailsActivity
-            context.startActivity(intent);
-        });
+//            Intent intent = new Intent(context, JobDetailsActivity.class);
+//
+//            // Passing the job details to the next activity
+//            intent.putExtra("companyName", companyName);
+//            intent.putExtra("jobTitle", jobTitle);
+//            intent.putExtra("jobDescription", jobDescription);
+//            intent.putExtra("jobSalary", jobSalary);
+//            intent.putExtra("startDate", startDate);
+//            intent.putExtra("lastDate", lastDate);
+//            intent.putExtra("totalOpenings", totalOpenings);
+//            intent.putExtra("requiredSkills", requiredSkills);
+//            intent.putExtra("additionalInfo", additionalInfo);
+//            intent.putExtra("userId", userId);
+//
+//            // Starting the JobDetailsActivity
+//            context.startActivity(intent);
+//        });
     }
 
     @NonNull

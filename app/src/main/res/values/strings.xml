@@ -9,6 +9,7 @@
     <string name="error_saving_login_info">Error saving login info: %1$s</string>
         <string name="unknown_user">Unknown User</string>
         <string name="unknown_job_title">Unknown Job Title</string>
+    <string name="unknown_job">Unknown Job</string>
         <string name="error_update_data">Error Updating Data</string>
     <string name="user_id_null">User ID is null</string>
     <string name="authentication_failed">Authentication failed. Please check your credentials.</string>

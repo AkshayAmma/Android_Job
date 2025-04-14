@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Home Menu Item -->
     <item
         android:id="@+id/homeMenu"
         android:icon="@drawable/home_icon"
-        android:title="Home" />
+        android:title="Home" /> <!-- If space allows, show in the action bar -->
 
+    <!-- Dashboard Menu Item -->
     <item
         android:id="@+id/Dashboard"
         android:icon="@drawable/dashboard_icon"
-        android:title="DashBoard" />
+        android:title="DashBoard" /> <!-- If space allows, show in the action bar -->
 
+    <!-- Profile Menu Item -->
     <item
         android:id="@+id/profileMenu"
         android:icon="@drawable/profile_icon"
-        android:title="Profile" />
+        android:title="Profile" /> <!-- If space allows, show in the action bar -->
 
 </menu>

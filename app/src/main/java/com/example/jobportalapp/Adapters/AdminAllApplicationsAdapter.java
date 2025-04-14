@@ -43,7 +43,7 @@ public class AdminAllApplicationsAdapter extends FirebaseRecyclerAdapter<Model, 
         }
 
         if (model.getJobTitle() != null) {
-            holder.txtDesc.setText(model.getJobTitle());
+            holder.txtDesc.setText("Job Title:"+model.getJobTitle());
         } else {
             holder.txtDesc.setText(context.getString(R.string.unknown_job_title));
         }

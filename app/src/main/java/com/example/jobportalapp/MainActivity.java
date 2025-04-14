@@ -8,10 +8,12 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.jobportalapp.Activities.AdminActivity;
 import com.example.jobportalapp.Activities.RoleActivity;
 import com.example.jobportalapp.Activities.StartingActivity;
+import com.example.jobportalapp.Fragments.AdminAllApplicationsFragment;
 import com.example.jobportalapp.Fragments.DisplayJobFragment;
 import com.example.jobportalapp.Fragments.UserDashboardFragment;
 import com.example.jobportalapp.Fragments.UserProfileFragment;
@@ -26,62 +28,60 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    FrameLayout frameLayout;
-    BottomNavigationView bottomNavigationView;
+    private FrameLayout frameLayout;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the views
+        // Initialize views
         frameLayout = findViewById(R.id.UserFragmentContainer);
         bottomNavigationView = findViewById(R.id.UserBottomNavigationView);
 
-        // Setting the default fragment as DisplayJobFragment
+        // Default fragment setup
         getSupportFragmentManager().beginTransaction().replace(R.id.UserFragmentContainer, new DisplayJobFragment()).commit();
 
         // Bottom navigation click listener
         bottomNavigationView.setOnItemSelectedListener(bottomNavigationMethod);
     }
 
-    private final BottomNavigationView.OnItemSelectedListener bottomNavigationMethod =
-            item -> {
-                // Assigning Fragment as Null
-                Fragment fragment = null;
+    private final BottomNavigationView.OnItemSelectedListener bottomNavigationMethod = item -> {
+        Fragment fragment = null;
 
-                // Show the appropriate Fragment based on the selected item
-                if (item.getItemId() == R.id.homeMenu) {
-                    fragment = new DisplayJobFragment();
-                } else if (item.getItemId() == R.id.Dashboard) {
-                    fragment = new UserDashboardFragment();
-                } else if (item.getItemId() == R.id.profileMenu) {
-                    fragment = new UserProfileFragment();
-                }
+        // Show appropriate Fragment based on selected item
+        if (item.getItemId() == R.id.homeMenu) {
+            fragment = new DisplayJobFragment();
+        } else if (item.getItemId() == R.id.Dashboard) {
+            fragment = new UserDashboardFragment();
+        } else if (item.getItemId() == R.id.profileMenu) {
+            fragment = new UserProfileFragment();
+        }
 
-                // Replacing the Fragment in the FrameLayout
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.UserFragmentContainer, fragment).commit();
-                }
+        // Replace fragment in FrameLayout
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.UserFragmentContainer, fragment).commit();
+        }
 
-                return true;
-            };
+        return true;
+    };
 
     @Override
     protected void onStart() {
         super.onStart();
-        // Check if the user is already logged in
         FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+
         if (mUser == null) {
-            // If the user is not logged in, redirect to StartingActivity
+            // If not logged in, redirect to StartingActivity (login screen)
             Intent intent = new Intent(MainActivity.this, StartingActivity.class);
             startActivity(intent);
-            finish();  // Optional: Finish MainActivity so the user can't go back to it
         } else {
+            // If logged in, check user role
             String userId = mUser.getUid();
             Log.d("MainActivityRoleCheck", "User ID: " + userId);
 
-            // Reference to the "role" in Firebase Realtime Database for the current user
+            // Reference to the "role" in Firebase Realtime Database
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("role");
 
             // Listen for the role data from Firebase
@@ -92,17 +92,14 @@ public class MainActivity extends AppCompatActivity {
                         String role = dataSnapshot.getValue(String.class);
 
                         if (role != null) {
-                            // Navigate to the appropriate activity based on role
+                            // Navigate based on the role
                             if (role.equals("admin")) {
-                                // Start Admin Activity
+                                // Redirect to AdminActivity
                                 Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                                 startActivity(intent);
-                                finish();  // Optional: Finish MainActivity to prevent going back
                             } else if (role.equals("user")) {
-                                // Start User Activity
-                                Intent intent = new Intent(MainActivity.this, RoleActivity.class);
-                                startActivity(intent);
-                                finish();  // Optional: Finish MainActivity to prevent going back
+                                // Stay in current activity, handle user-specific UI
+                                handleUserRole();
                             }
                         } else {
                             Log.e("MainActivityRoleCheck", "Role is null for user " + userId);
@@ -118,5 +115,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void handleUserRole() {
+        // Setup specific UI or navigation for normal user roles
+        // Here, you could set up fragments like user dashboard or job listings based on your app design.
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.UserFragmentContainer, new DisplayJobFragment());  // Default fragment for users
+        transaction.commit();
     }
 }

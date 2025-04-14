@@ -8,155 +8,162 @@
     tools:ignore="HardcodedText"
     tools:context=".Fragments.AddJobFragment">
 
-    <!-- ScrollView wrapping the content inside LinearLayout -->
-    <ScrollView
+    <!-- LinearLayout directly wrapping the content -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/jobi"
+        android:padding="16dp">
 
-        <LinearLayout
+        <!-- Company Name Input -->
+        <EditText
+            android:id="@+id/CompanyNameEditTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/jobi"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:inputType="text"
+            android:hint="Company Name"
+            android:autofillHints="organization"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Company Name Input -->
-            <EditText
-                android:id="@+id/CompanyNameEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Company Name"
-                android:autofillHints="organization"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Job Title Input -->
+        <EditText
+            android:id="@+id/JobTitleEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Job Title"
+            android:autofillHints="jobTitle"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Job Title Input -->
-            <EditText
-                android:id="@+id/JobTitleEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Job Title"
-                android:autofillHints="jobTitle"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Job Salary Input -->
+        <EditText
+            android:id="@+id/JobSalaryEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="Job Salary"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Job Salary Input -->
-            <EditText
-                android:id="@+id/JobSalaryEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="Job Salary"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Job Start Date Input -->
+        <EditText
+            android:id="@+id/JobStartDateEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:hint="Start Date"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Job Start Date Input -->
-            <EditText
-                android:id="@+id/JobStartDateEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="Start Date"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Job Last Date to Apply Input -->
+        <EditText
+            android:id="@+id/JobLastDateEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:hint="Apply By"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Job Last Date to Apply Input -->
-            <EditText
-                android:id="@+id/JobLastDateEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="Apply By"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Total Openings Input -->
+        <EditText
+            android:id="@+id/TotalOpeningsEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="No of Openings"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Total Openings Input -->
-            <EditText
-                android:id="@+id/TotalOpeningsEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="No of Openings"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- About the Job Input -->
+        <EditText
+            android:id="@+id/AboutJobEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="About the Job"
+            android:inputType="textMultiLine"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:gravity="top|start"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- About the Job Input -->
-            <EditText
-                android:id="@+id/AboutJobEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="About the Job"
-                android:inputType="textMultiLine"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:gravity="top|start"/>
+        <!-- Skills Required Input -->
+        <EditText
+            android:id="@+id/SkillsRequiredEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Skills Required"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Skills Required Input -->
-            <EditText
-                android:id="@+id/SkillsRequiredEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Skills Required"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="16dp"
-                android:padding="10dp"
-                android:textSize="16sp"/>
+        <!-- Additional Information Input -->
+        <EditText
+            android:id="@+id/AddationalInfoEditTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="Additional Information"
+            android:autofillHints="none"
+            android:minHeight="48dp"
+            android:layout_marginBottom="32dp"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:gravity="top|start"
+            android:background="@drawable/edittext_background"/>
 
-            <!-- Additional Information Input -->
-            <EditText
-                android:id="@+id/AddationalInfoEditTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:hint="Additional Information"
-                android:autofillHints="none"
-                android:minHeight="48dp"
-                android:layout_marginBottom="32dp"
-                android:padding="10dp"
-                android:textSize="16sp"
-                android:gravity="top|start"/>
+        <!-- Add Job Button -->
+        <Button
+            android:id="@+id/AddJobBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Add Job"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:padding="12dp" />
 
-            <!-- Add Job Button -->
-            <Button
-                android:id="@+id/AddJobBtn"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="#4CAF50"
-                android:text="Add Job"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+        <!-- ProgressBar (Initially Hidden) -->
+        <ProgressBar
+            android:id="@+id/progress_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center" />
 
-            <ProgressBar
-                android:id="@+id/progress_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </LinearLayout>

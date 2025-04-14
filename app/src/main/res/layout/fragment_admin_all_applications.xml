@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/jobi"
+    android:orientation="horizontal"
     tools:context=".Fragments.AdminAllApplicationsFragment">
 
     <!-- Adding contentDescription to make it accessible for screen readers -->
@@ -13,5 +14,12 @@
         android:layout_height="match_parent"
         android:contentDescription="List of all applications submitted by users for jobs"
         />
+    <TextView
+        android:id="@+id/noApplicationsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Applications Found"
+        android:visibility="gone" />
+
 
 </LinearLayout>

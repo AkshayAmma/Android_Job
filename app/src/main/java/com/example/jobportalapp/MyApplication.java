@@ -10,10 +10,12 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Initialize Firebase here if not already initialized
+        // Initialize Firebase if not already initialized
         if (FirebaseApp.getApps(this).isEmpty()) {
             FirebaseApp.initializeApp(this);
         }
+
+        // Enable offline persistence for Firebase Realtime Database
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 }

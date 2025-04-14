@@ -48,6 +48,7 @@ dependencies {
 
 
     implementation libs.activity
+
     implementation libs.constraintlayout
     implementation libs.credentials
     implementation libs.credentials.play.services.auth

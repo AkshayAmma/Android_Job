@@ -37,7 +37,7 @@ public class RoleActivity extends AppCompatActivity {
 
         // Initialize ProgressBar
         progressBar = findViewById(R.id.r_bar);
-        progressBar.setVisibility(ProgressBar.GONE); // Hide initially
+        progressBar.setVisibility(ProgressBar.INVISIBLE); // Use INVISIBLE instead of GONE for better reusability
 
         // Initialize buttons
         Button jobSeekerBtn = findViewById(R.id.JobSeekerBtn);
@@ -64,12 +64,11 @@ public class RoleActivity extends AppCompatActivity {
                 .child("role")
                 .setValue(role)
                 .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(ProgressBar.GONE);  // Hide the progress bar when done
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);  // Hide the progress bar when done
                     if (task.isSuccessful()) {
                         // Navigate to the corresponding activity based on the role
                         Intent intent = new Intent(getApplicationContext(), nextActivity);
                         startActivity(intent);
-                        finish();
                     } else {
                         // Handle the error if something goes wrong
                         String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error occurred.";
@@ -84,6 +83,5 @@ public class RoleActivity extends AppCompatActivity {
     private void redirectToLogin() {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
-        finish();
     }
 }
